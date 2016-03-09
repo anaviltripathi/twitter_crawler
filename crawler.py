@@ -10,6 +10,18 @@ with open("config.txt", 'r') as f:
     access_token_secret = f.readline().strip()
 
 import sys
+class Search(object):
+    def __init__(self):    
+        auth = OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token,access_token_secret)
+        self.api=tweepy.API(auth)
+
+    def getUser(self, user_id):
+        return self.api.lookup_users(user_ids=[user_id])
+
+    def getUserByName(self, username):
+        return self.api.get_user(username)
+        
 class StdOutListener(StreamListener):
     i = 0
     def on_status(self, status):
